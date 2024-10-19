@@ -1,0 +1,98 @@
+@startuml
+class bikeproject.BikeDriver {
++ {static} void main(String[])
+}
+
+interface bikeproject.Foldable {
+~ boolean isFolded()
+~ void fold()
+~ void unfold()
+}
+
+class bikeproject.Bike {
+- String handleBars
+- int numGears
++ void printDescription()
++ String getHandleBars()
++ String getFrame()
++ String getTyres()
++ String getSeatType()
++ int getNumGears()
++ String getMake()
++ void setHandleBars(String)
++ void setFrame(String)
++ void setTyres(String)
++ void setSeatType(String)
++ void setNumGears(int)
+}
+
+
+interface bikeproject.RoadParts {
+~ {static} String TERRAIN
+~ int getTyreWidth()
+~ void setTyreWidth(int)
+~ int getPostHeight()
+~ void setPostHeight(int)
+}
+
+
+class bikeproject.MountainBike {
+- String suspension
+- int frameSize
++ void printDescription()
++ String getSuspension()
++ void setSuspension(String)
++ String getType()
++ void setType(String)
+}
+
+
+class bikeproject.RoadBike {
+- int tyreWidth
+- boolean isCurrentlyFolded
++ void printDescription()
++ int getTyreWidth()
++ void setTyreWidth(int)
++ int getPostHeight()
++ void setPostHeight(int)
++ boolean isFolded()
++ void fold()
++ void unfold()
+}
+
+
+interface bikeproject.BikeParts {
+~ {static} String make
+~ void printDescription()
+~ String getHandleBars()
+~ String getFrame()
+~ String getTyres()
+~ String getSeatType()
+~ String getMake()
+~ int getNumGears()
+~ void setHandleBars(String)
+~ void setFrame(String)
+~ void setTyres(String)
+~ void setSeatType(String)
+~ void setNumGears(int)
+}
+
+
+interface bikeproject.MountainParts {
+~ {static} String TERRAIN
+~ String getSuspension()
+~ void setSuspension(String)
+~ String getType()
+~ void setType(String)
+}
+
+
+
+
+bikeproject.BikeParts <|.. bikeproject.Bike
+bikeproject.MountainParts <|.. bikeproject.MountainBike
+bikeproject.Bike <|-- bikeproject.MountainBike
+bikeproject.RoadParts <|.. bikeproject.RoadBike
+bikeproject.Foldable <|.. bikeproject.RoadBike
+bikeproject.Bike <|-- bikeproject.RoadBike
+@enduml
