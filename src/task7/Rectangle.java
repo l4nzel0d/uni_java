@@ -51,4 +51,15 @@ public class Rectangle extends GeometricObject {
     public double getPerimeter() {
         return 2 * (width + height);
     }
+
+    @Override
+    public int compareTo(GeometricObject geometricObject) {
+        Rectangle rectangle = (Rectangle)geometricObject;
+        return Double.compare(getArea(), rectangle.getArea());
+    }
+
+    @Override
+    public String howToColor() {
+        return "Раскрасьте все 4 стороны";
+    }
 }

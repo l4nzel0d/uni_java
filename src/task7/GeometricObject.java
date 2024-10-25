@@ -1,6 +1,6 @@
 package task7;
 
-public class GeometricObject {
+public abstract class GeometricObject implements Comparable<GeometricObject>, Colorable {
     private String color = "белый";
     private boolean filled;
     private java.util.Date dateCreated;
@@ -48,4 +48,18 @@ public class GeometricObject {
         return "создан " + dateCreated + ",\nцвет: " + color +
                 ", заливка: " + filled;
     }
+
+    @Override
+    public int compareTo(GeometricObject obj2) {
+        return dateCreated.compareTo(obj2.dateCreated);
+    }
+
+    public static GeometricObject max(GeometricObject obj1, GeometricObject obj2) {
+        if(obj1.compareTo(obj2) >= 0)
+            return obj1;
+        return obj2;
+    };
+
+
+    public abstract double getArea();
 }

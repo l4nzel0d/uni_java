@@ -1,59 +1,81 @@
 package task7;
 
-public class Triangle extends GeometricObject {
-    double side1 = 1.0, side2 = 1.0, side3 = 1.0;
+public class Triangle extends GeometricObject implements Colorable {
+    private double a = 1.0;
+    private double b = 1.0;
+    private double c = 1.0;
 
-    /** Создает треугольник с указанными сторонами */
-    public Triangle(double side1, double side2, double side3) throws IllegalTriangleException {
-        // Проверяем условия для формирования треугольника
-        if (side1 <= 0 || side2 <= 0 || side3 <= 0) {
-            throw new IllegalTriangleException("Стороны треугольника должны быть положительными.");
+    public Triangle() {
+        super(); // Вызывает конструктор родителя
+    }
+
+    // Конструктор с заданными сторонами
+    public Triangle(double a, double b, double c) throws IllegalTriangleException {
+        this(a, b, c, null, false); // Вызов конструктора с заданными сторонами и значениями по умолчанию
+    }
+
+    // Конструктор с заданными сторонами, цветом и заливкой
+    public Triangle(double a, double b, double c, String color, boolean filled) throws IllegalTriangleException {
+        super(color, filled); // Вызывает конструктор родителя с цветом и заливкой
+        if (!checkSides(a, b, c)) {
+            throw new IllegalTriangleException("В треугольнике сумма любых двух сторон должна быть больше третьей.");
         }
-        if (side1 + side2 <= side3 || side1 + side3 <= side2 || side2 + side3 <= side1) {
-            throw new IllegalTriangleException("Сумма длин любых двух сторон должна быть больше длины третьей стороны.");
-        }
-
-        this.side1 = side1;
-        this.side2 = side2;
-        this.side3 = side3;
+        this.a = a;
+        this.b = b;
+        this.c = c;
     }
 
-    public double getSide1() {
-        return side1;
+    private Boolean checkSides(double a, double b, double c) {
+        return (a + b > c && a + c > b && b + c > a);
     }
 
-    public void setSide1(double side1) {
-        this.side1 = side1;
+    public double getA() {
+        return a;
     }
 
-    public double getSide2() {
-        return side2;
+    public double getB() {
+        return b;
     }
 
-    public void setSide2(double side2) {
-        this.side2 = side2;
+    public double getC() {
+        return c;
     }
 
-    public double getSide3() {
-        return side3;
+    public void setA(double a) {
+        this.a = a;
     }
 
-    public void setSide3(double side3) {
-        this.side3 = side3;
+    public void setB(double b) {
+        this.b = b;
+    }
+
+    public void setC(double c) {
+        this.c = c;
     }
 
     public double getArea() {
-        double s = (side1 + side2 + side3) / 2;
-        return Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+        double s = (a + b + c) / 2;
+        return Math.sqrt(s * (s - a) * (s - b) * (s - c));
     }
 
     public double getPerimeter() {
-        return side1 + side2 + side3;
+        return a + b + c;
     }
 
     @Override
     public String toString() {
-        return "Треугольник: сторона1 = " + side1 + ", сторона2 = " + side2 +
-                ", сторона3 = " + side3;
+        return super.toString() + "\nТреугольник: сторона1 = " + a + " сторона2 = " + b + " сторона3 = " + c;
+    }
+
+
+    @Override
+    public int compareTo(GeometricObject geometricObject) {
+        Triangle triangle = (Triangle) geometricObject;
+        return Double.compare(getArea(), triangle.getArea());
+    }
+
+    @Override
+    public String howToColor() {
+        return "Раскрастье все три стороны";
     }
 }

@@ -1,6 +1,6 @@
 package task7;
 
-public class Circle extends GeometricObject {
+public class Circle extends GeometricObject implements Colorable  {
     private double radius;
 
     /** Создает по умолчанию заданный круг */
@@ -48,5 +48,16 @@ public class Circle extends GeometricObject {
     public void printCircle() {
         System.out.println("Круг создан " + getDateCreated() +
                 " и радиус равен " + radius);
+    }
+
+    @Override
+    public int compareTo(GeometricObject geometricObject) {
+        Circle circle = (Circle)geometricObject;
+        return Double.compare(getArea(), circle.getArea());
+    }
+
+    @Override
+    public String howToColor() {
+        return "Закрастье весь круг";
     }
 }
